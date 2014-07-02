@@ -12,6 +12,7 @@ describe "configureLogger", ->
     it "gets the logger from the hierarchy", ->
         logger = new Logger
         hier =
+            loggers: {}
             getLogger: sinon.stub().returns logger
 
         result = configureLogger self, hier, 'foo', {}
@@ -44,3 +45,57 @@ describe "configureLogger", ->
             sinks: [type: './bar[kitchen]']
 
         assert.lengthOf logger.sinks, 1
+
+    it "uses the same logger when reconfiguring", ->
+        firstLogger = configureLogger self, hier, 'foo', {}
+        secondLogger = configureLogger self, hier, 'foo', {}
+
+        assert.strictEqual firstLogger, secondLogger
+
+    it "uses the same logger when reconfiguring with specific factory", ->
+        firstLogger = configureLogger self, hier, 'foo',
+            type: './bar[logger]'
+        secondLogger = configureLogger self, hier, 'foo',
+            type: './bar[logger]'
+
+        assert.strictEqual firstLogger, secondLogger
+
+    it "throws when trying to change type of logger", ->
+        logger = configureLogger self, hier, 'foo', {}
+        assert.throws (-> configureLogger self, hier, 'foo',
+            type: './bar[logger]'
+        ), Error, /type of logger/i
+
+    it "throws when trying to change type of logger to generic", ->
+        logger = configureLogger self, hier, 'foo',
+            type: './bar[logger]'
+        assert.throws (
+            -> configureLogger self, hier, 'foo', {}
+        ), Error, /type of logger/i
+
+    it "reuses logger created outside", ->
+        firstLogger = hier.getLogger 'foo'
+        secondLogger = configureLogger self, hier, 'foo', {}
+        assert.strictEqual firstLogger, secondLogger
+
+    it "reuses existing processor if config is the same", ->
+        spy = self.require('./bar').spyProcessor
+        spy.reset()
+
+        logger = configureLogger self, hier, 'foo',
+            processors: [type: './bar[spyProcessor]']
+
+        logger = configureLogger self, hier, 'foo',
+            processors: [type: './bar[spyProcessor]']
+
+        assert.calledOnce spy
+        assert.lengthOf logger.processors, 1
+
+    it "reuses existing sink if config is the same", ->
+        logger = configureLogger self, hier, 'foo',
+            processors: [type: './bar[processor]']
+
+        logger = configureLogger self, hier, 'foo',
+            processors: [type: './bar[processor]']
+
+        assert.lengthOf logger.processors, 1

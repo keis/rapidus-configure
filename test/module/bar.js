@@ -1,4 +1,5 @@
-var rapidus = require('rapidus');
+var rapidus = require('rapidus'),
+    sinon = require('sinon');
 
 module.exports.funone = {value: 1}
 module.exports.funtwo = {value: 2}
@@ -12,6 +13,9 @@ module.exports.processor = function (config) {
         record.processed = true;
     };
 }
+
+module.exports.spyProcessor = sinon.spy(module.exports.processor);
+
 module.exports.logger = function (name) {
     var logger = new rapidus.Logger();
     logger.bar = true;

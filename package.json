@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "rapidus": "0.0.3",
-    "underscore": "1.6.x"
+    "underscore": "1.6.x",
+    "sigmund": "1.x.x"
   },
   "devDependencies": {
     "coffee-script": "~1.7.1",
