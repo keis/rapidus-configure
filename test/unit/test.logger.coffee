@@ -91,11 +91,30 @@ describe "configureLogger", ->
         assert.calledOnce spy
         assert.lengthOf logger.processors, 1
 
+    it "removes processor no longer needed", ->
+        logger = configureLogger self, hier, 'foo',
+            processors: [type: './bar[processor]']
+
+        logger = configureLogger self, hier, 'foo', {}
+
+        assert.lengthOf logger.processors, 0
+
     it "reuses existing sink if config is the same", ->
-        logger = configureLogger self, hier, 'foo',
-            processors: [type: './bar[processor]']
+        spy = self.require('./bar').kitchenSpy
+        spy.reset()
 
         logger = configureLogger self, hier, 'foo',
-            processors: [type: './bar[processor]']
+            sinks: [type: './bar[kitchenSpy]']
 
-        assert.lengthOf logger.processors, 1
+        logger = configureLogger self, hier, 'foo',
+            sinks: [type: './bar[kitchenSpy]']
+
+        assert.lengthOf logger.sinks, 1
+
+    it "removes sink no longer needed", ->
+        logger = configureLogger self, hier, 'foo',
+            sinks: [type: './bar[kitchen]']
+
+        logger = configureLogger self, hier, 'foo', {}
+
+        assert.lengthOf logger.sinks, 0

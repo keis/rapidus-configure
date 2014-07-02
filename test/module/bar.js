@@ -8,6 +8,8 @@ module.exports.kitchen = function (config) {
     sink.kitchen = true;
     return sink;
 };
+module.exports.kitchenSpy = sinon.spy(module.exports.kitchen);
+
 module.exports.processor = function (config) {
     return function (record) {
         record.processed = true;
