@@ -13,3 +13,6 @@ describe "resolveType", ->
     it "resolves a builtin type", ->
         type = resolveType self, 'console'
         assert.isFunction type
+
+    it "throws on invalid type string", ->
+        assert.throws (-> resolveType self, 'foo[bar'), Error, /invalid type/i
