@@ -99,6 +99,18 @@ describe "configureLogger", ->
 
         assert.lengthOf logger.processors, 0
 
+    it "does not remove processor defined outside", ->
+        proc = sinon.stub()
+
+        logger = configureLogger self, hier, 'foo',
+            processors: [type: './bar[processor]']
+        logger.addProcessor proc
+
+        logger = configureLogger self, hier, 'foo',
+            processors: []
+
+        assert.deepEqual logger.processors, [proc]
+
     it "reuses existing sink if config is the same", ->
         spy = self.require('./bar').kitchenSpy
         spy.reset()
@@ -118,3 +130,15 @@ describe "configureLogger", ->
         logger = configureLogger self, hier, 'foo', {}
 
         assert.lengthOf logger.sinks, 0
+
+    it "does not remove sink defined outside", ->
+        sink = sinon.stub()
+
+        logger = configureLogger self, hier, 'foo',
+            sinks: [type: './bar[kitchen]']
+        logger.addSink sink
+
+        logger = configureLogger self, hier, 'foo',
+            sinks: []
+
+        assert.lengthOf logger.sinks, 1
