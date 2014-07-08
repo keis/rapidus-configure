@@ -1,4 +1,4 @@
-{Logger, Hierarchy} = require 'rapidus'
+{Logger, createHierarchy} = require 'rapidus'
 proxy = require 'rapidus/lib/proxy'
 sinon = require 'sinon'
 net = require 'net'
@@ -9,9 +9,7 @@ describe "configure", ->
 
     hier = undefined
     beforeEach ->
-        # this silly setup should be wrapped as a function in main rapidus
-        hier = new Hierarchy new Logger null, 'root', 20
-        hier.root.hier = hier
+        hier = createHierarchy()
 
     it "configures the logger hierarchy", ->
         config =

@@ -10,9 +10,9 @@
     "test": "mocha --require test/bootstrap.js --compilers coffee:coffee-script/register --recursive test/unit"
   },
   "dependencies": {
-    "rapidus": "0.0.3",
-    "underscore": "1.6.x",
-    "sigmund": "1.x.x"
+    "rapidus": "^0.1.3",
+    "sigmund": "1.x.x",
+    "underscore": "1.6.x"
   },
   "devDependencies": {
     "coffee-script": "~1.7.1",

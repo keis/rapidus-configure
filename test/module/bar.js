@@ -18,8 +18,8 @@ module.exports.processor = function (config) {
 
 module.exports.spyProcessor = sinon.spy(module.exports.processor);
 
-module.exports.logger = function (name) {
-    var logger = new rapidus.Logger();
+module.exports.logger = function (hier, name) {
+    var logger = new rapidus.Logger(hier, name);
     logger.bar = true;
     return logger;
 };

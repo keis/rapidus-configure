@@ -1,4 +1,4 @@
-{Logger, Hierarchy} = require 'rapidus'
+{Logger, createHierarchy} = require 'rapidus'
 sinon = require 'sinon'
 
 describe "configureLogger", ->
@@ -7,7 +7,7 @@ describe "configureLogger", ->
 
     hier = undefined
     beforeEach ->
-        hier = new Hierarchy
+        hier = createHierarchy()
 
     it "gets the logger from the hierarchy", ->
         logger = new Logger
@@ -45,6 +45,22 @@ describe "configureLogger", ->
             sinks: [type: './bar[kitchen]']
 
         assert.lengthOf logger.sinks, 1
+
+    it "replaces placeholder with real logger", ->
+        sublogger = configureLogger self, hier, 'foo.bar', {}
+        logger = configureLogger self, hier, 'foo',
+            sinks: [type: './bar[kitchen]']
+
+        assert.lengthOf logger.sinks, 1
+        assert.strictEqual sublogger.parent, logger
+
+    it "replaces placeholder with logger from specific factory", ->
+        sublogger = configureLogger self, hier, 'foo.bar', {}
+        logger = configureLogger self, hier, 'foo',
+            type: './bar[logger]'
+
+        assert.propertyVal logger, 'bar', true
+        assert.strictEqual sublogger.parent, logger
 
     it "uses the same logger when reconfiguring", ->
         firstLogger = configureLogger self, hier, 'foo', {}
