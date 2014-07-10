@@ -46,6 +46,32 @@ describe "configureLogger", ->
 
         assert.lengthOf logger.sinks, 1
 
+    it "does not attach sinks when proxying", ->
+        hier.proxy = {}
+        logger = configureLogger self, hier, 'foo',
+            sinks: [type: './bar[kitchen]']
+
+        assert.lengthOf logger.sinks, 0
+
+    it "attaches a sinks when proxying if explicitly marked", ->
+        hier.proxy = {}
+        logger = configureLogger self, hier, 'foo',
+            sinks: [
+                (type: './bar[kitchen]')
+                (type: './bar[kitchen]', worker: true)
+            ]
+
+        assert.lengthOf logger.sinks, 1
+
+    it "does not attach a sinks on proxy server if explicitly marked", ->
+        logger = configureLogger self, hier, 'foo',
+            sinks: [
+                (type: './bar[kitchen]')
+                (type: './bar[kitchen]', master: false)
+            ]
+
+        assert.lengthOf logger.sinks, 1
+
     it "replaces placeholder with real logger", ->
         sublogger = configureLogger self, hier, 'foo.bar', {}
         logger = configureLogger self, hier, 'foo',
