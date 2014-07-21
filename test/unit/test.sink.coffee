@@ -24,3 +24,16 @@ describe "configureSink", ->
                 type: './foo'
 
         str = sink.format()
+        assert.equal str, "this is a foormatter"
+
+    it "does not modify the config object", ->
+        sentinel = {}
+        config =
+            type: 'console',
+            format:
+                type: './foo'
+                test: sentinel
+
+        sink = configureSink self, config
+
+        assert.strictEqual config.format.test, sentinel
