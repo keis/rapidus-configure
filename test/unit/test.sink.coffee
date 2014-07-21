@@ -1,7 +1,7 @@
 {Sink} = require 'rapidus'
 
 describe "configureSink", ->
-    {configureSink} = require '../../lib/'
+    {configureSink} = require '../../lib/configure'
     {self} = require '../module'
 
     it "creates a `Sink` instance", ->

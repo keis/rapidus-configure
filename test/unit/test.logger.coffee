@@ -2,7 +2,7 @@
 sinon = require 'sinon'
 
 describe "configureLogger", ->
-    {configureLogger} = require '../../lib/'
+    {configureLogger} = require '../../lib/configure'
     {self} = require '../module'
 
     hier = undefined

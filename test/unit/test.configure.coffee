@@ -4,7 +4,7 @@ sinon = require 'sinon'
 net = require 'net'
 
 describe "configure", ->
-    configure = require '../../lib/'
+    configure = require '../../lib/configure'
     {self} = require '../module'
 
     hier = undefined

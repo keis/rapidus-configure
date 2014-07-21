@@ -1,5 +1,5 @@
 describe "configureFormat", ->
-    {configureFormat} = require '../../lib/'
+    {configureFormat} = require '../../lib/configure'
     {self} = require '../module'
 
     it "creates a formatter from pattern string", ->

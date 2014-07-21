@@ -1,5 +1,5 @@
 describe "resolveType", ->
-    {resolveType} = require '../../lib/'
+    {resolveType} = require '../../lib/configure'
     {self} = require '../module'
 
     it "resolves a module", ->
