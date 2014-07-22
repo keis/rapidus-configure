@@ -34,6 +34,12 @@ describe "configureLogger", ->
 
         assert.equal logger.getEffectiveLevel(), 10
 
+    it "sets the propagation flag of the logger if configured", ->
+        logger = configureLogger self, hier, 'foo',
+            propagate: 0
+
+        assert.strictEqual logger.propagate, false
+
     it "attaches a processor", ->
         logger = configureLogger self, hier, 'foo',
             processors: [type: './bar[processor]']
