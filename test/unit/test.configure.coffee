@@ -49,6 +49,17 @@ describe "configure", ->
 
             assert.property hier, 'proxy'
 
+        it "does not replace existing proxy client", ->
+            config =
+                proxy: true
+
+            configure config, hier, self
+            proxy = hier.proxy
+
+            configure config, hier, self
+
+            assert.strictEqual hier.proxy, proxy
+
         it "creates a proxy server", ->
             config =
                 proxy: true
@@ -57,3 +68,10 @@ describe "configure", ->
             configure config, hier, self
 
             assert.property process.env, 'LOGGING_PROXY'
+
+        it "throws if config value is truthy but not true", ->
+            config =
+                proxy: "on"
+
+            assert.throws (-> configure config, hier, hier, self),
+                          Error
