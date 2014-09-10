@@ -33,6 +33,22 @@ describe "configure", ->
         assert.equal bar.getEffectiveLevel(), 30
         assert.lengthOf bar.sinks, 0
 
+    it "configures default processors", ->
+        config =
+            defaultProcessors: [
+                type: './bar[processor]'
+            ]
+
+        configure config, hier, self
+        sink = sinon.stub()
+
+        logger = hier.getLogger()
+        logger.addSink sink
+
+        hier.getLogger().error 'test'
+        assert.calledOnce sink
+        assert.calledWith sink, sinon.match.has 'processed'
+
     describe "proxy", ->
         server = undefined
 
