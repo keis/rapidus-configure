@@ -10,11 +10,11 @@
     "test": "mocha --require test/bootstrap.js --compilers coffee:coffee-script/register --recursive test/unit"
   },
   "dependencies": {
-    "sigmund": "1.x.x",
-    "underscore": "1.6.x"
+    "sigmund": "^1.0.0",
+    "underscore": "^1.6.0"
   },
   "peerDependencies": {
-    "rapidus": "^0.2.0"
+    "rapidus": "^0.3.0"
   },
   "devDependencies": {
     "awake": "^0.1.1",
@@ -24,7 +24,7 @@
     "docco": "^0.6.3",
     "istanbul": "~0.2.10",
     "mocha": "~1.19.0",
-    "rapidus": "^0.2.1",
+    "rapidus": "^0.3.0",
     "sinon": "~1.10.0"
   }
 }
