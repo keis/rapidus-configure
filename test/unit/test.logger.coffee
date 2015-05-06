@@ -129,7 +129,8 @@ describe "configureLogger", ->
     assert.strictEqual firstLogger, secondLogger
 
   it "reuses existing processor if config is the same", ->
-    spy = self.require('./bar').spyProcessor
+    spy = self.require './bar'
+        .spyProcessor
     spy.reset()
 
     logger = configureLogger self, hier, 'foo',
@@ -162,7 +163,8 @@ describe "configureLogger", ->
     assert.deepEqual logger.processors, [proc]
 
   it "reuses existing sink if config is the same", ->
-    spy = self.require('./bar').kitchenSpy
+    spy = self.require './bar'
+        .kitchenSpy
     spy.reset()
 
     logger = configureLogger self, hier, 'foo',

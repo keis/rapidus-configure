@@ -49,6 +49,24 @@ describe "configure", ->
     assert.calledOnce sink
     assert.calledWith sink, sinon.match.has 'processed'
 
+  it "reuses default processors", ->
+    spy = self.require './bar'
+        .spyProcessor
+    spy.reset()
+
+    config =
+      defaultProcessors: [
+        type: './bar[spyProcessor]'
+      ]
+
+    configure config, hier, self
+    configure config, hier, self
+
+    logger = hier.getLogger()
+
+    hier.getLogger().error 'test'
+    assert.calledOnce spy
+
   describe "proxy", ->
     server = undefined
 
