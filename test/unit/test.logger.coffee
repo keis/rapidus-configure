@@ -103,8 +103,10 @@ describe "configureLogger", ->
   it "uses the same logger when reconfiguring with specific factory", ->
     firstLogger = configureLogger self, hier, 'foo',
       type: './bar[logger]'
+      dummy: 'old'
     secondLogger = configureLogger self, hier, 'foo',
       type: './bar[logger]'
+      dummy: 'new'
 
     assert.strictEqual firstLogger, secondLogger
 
