@@ -1,5 +1,5 @@
-module.exports = function (options) {
-    return function (data) {
-        return 'this is a foormatter';
-    };
+module.exports = function () {
+  return function () {
+    return 'this is a foormatter'
+  }
 }

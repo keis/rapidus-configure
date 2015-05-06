@@ -1,1 +1,1 @@
-module.exports.self = module;
+module.exports.self = module
