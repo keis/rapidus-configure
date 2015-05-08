@@ -19,7 +19,6 @@
     "object-values": "^1.0.0",
     "sigmund": "^1.0.0",
     "sparse-splice": "^1.0.0",
-    "underscore": "^1.6.0",
     "util-each": "^1.0.1"
   },
   "peerDependencies": {
