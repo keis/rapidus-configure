@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "sigmund": "^1.0.0",
+    "sparse-splice": "^1.0.0",
     "underscore": "^1.6.0"
   },
   "peerDependencies": {
