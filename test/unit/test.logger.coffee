@@ -167,13 +167,22 @@ describe "configureLogger", ->
         .kitchenSpy
     spy.reset()
 
-    logger = configureLogger self, hier, 'foo',
-      sinks: [type: './bar[kitchenSpy]']
+    sink =
+      type: './bar[kitchenSpy]'
+      format:
+        type: './foo'
+        format: 'formatstr'
 
     logger = configureLogger self, hier, 'foo',
-      sinks: [type: './bar[kitchenSpy]']
+      sinks: [sink]
+
+    logger.sinks[0].__tag = 'THE ONE'
+
+    logger = configureLogger self, hier, 'foo',
+      sinks: [sink]
 
     assert.lengthOf logger.sinks, 1
+    assert.propertyVal logger.sinks[0], '__tag', 'THE ONE'
 
   it "removes sink no longer needed", ->
     logger = configureLogger self, hier, 'foo',
