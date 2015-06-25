@@ -22,7 +22,7 @@
     "util-each": "^1.0.1"
   },
   "peerDependencies": {
-    "rapidus": "^0.3.0"
+    "rapidus": "^0.4.0"
   },
   "devDependencies": {
     "billom": "^1.0.2",
@@ -34,7 +34,7 @@
     "eslint": "^0.23.0",
     "istanbul": "^0.3.13",
     "mocha": "^2.2.4",
-    "rapidus": "^0.3.0",
+    "rapidus": "^0.4.0",
     "sinon": "^1.10.0"
   }
 }

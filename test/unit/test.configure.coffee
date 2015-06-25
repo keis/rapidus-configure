@@ -1,4 +1,4 @@
-{Logger, createHierarchy} = require 'rapidus'
+{Sink, Logger, createHierarchy} = require 'rapidus'
 proxy = require 'rapidus/lib/proxy'
 sinon = require 'sinon'
 net = require 'net'
@@ -40,14 +40,15 @@ describe "configure", ->
       ]
 
     configure config, hier, self
-    sink = sinon.stub()
+    sink = new Sink
+    sink.write = sinon.stub()
 
     logger = hier.getLogger()
     logger.addSink sink
 
     hier.getLogger().error 'test'
-    assert.calledOnce sink
-    assert.calledWith sink, sinon.match.has 'processed'
+    assert.calledOnce sink.write
+    assert.calledWith sink.write, sinon.match.has 'processed'
 
   it "reuses default processors", ->
     spy = self.require './bar'
