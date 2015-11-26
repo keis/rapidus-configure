@@ -6,6 +6,7 @@
     "type": "git",
     "url": "https://github.com/keis/rapidus-configure.git"
   },
+  "license": "ISC",
   "files": [
     "lib/configure.js",
     "README.md"
