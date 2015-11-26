@@ -18,7 +18,7 @@
     "docs": "docco lib/*.js"
   },
   "dependencies": {
-    "object-assign": "^3.0.0",
+    "object-assign": "^4.0.0",
     "object-pick": "^0.1.1",
     "object-values": "^1.0.0",
     "sigmund": "^1.0.0",
