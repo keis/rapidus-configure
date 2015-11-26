@@ -6,6 +6,10 @@
     "type": "git",
     "url": "https://github.com/keis/rapidus-configure.git"
   },
+  "files": [
+    "lib/configure.js",
+    "README.md"
+  ],
   "scripts": {
     "lint": "eslint lib test && coffeelint test",
     "test": "mocha --require test/bootstrap.js --compilers coffee:coffee-script/register --recursive test/unit",
@@ -22,7 +26,7 @@
     "util-each": "^1.0.1"
   },
   "peerDependencies": {
-    "rapidus": "^0.4.0"
+    "rapidus": "~0.4.0"
   },
   "devDependencies": {
     "billom": "^1.0.2",
